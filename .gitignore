@@ -1,0 +1,100 @@
+# =========================
+# Node / React / Vite
+# =========================
+
+node_modules/
+dist/
+build/
+.vite/
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+
+# =========================
+# Python / FastAPI
+# =========================
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Python environment files
+.python-version
+
+# FastAPI / Uvicorn
+*.log
+
+
+# =========================
+# LangChain / AI
+# =========================
+
+# Local model/cache files
+.cache/
+chroma/
+chroma_db/
+
+# Vector databases
+*.faiss
+*.pkl
+
+
+# =========================
+# Database
+# =========================
+
+# Local database files
+*.db
+*.sqlite
+*.sqlite3
+
+
+# =========================
+# IDE / Editors
+# =========================
+
+.vscode/
+.idea/
+
+# VS Code settings (optional)
+# .vscode/
+
+
+# =========================
+# OS Files
+# =========================
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+
+# =========================
+# Secrets
+# =========================
+
+*.pem
+*.key
+*.crt
+
+secrets/
+credentials/
