@@ -1,6 +1,18 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 
 app = FastAPI()
+
+
+# Allow React frontend to communicate with FastAPI
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 jobs = [
@@ -28,6 +40,11 @@ jobs = [
 ]
 
 
+# Data received from React
+class SearchRequest(BaseModel):
+    query: str
+
+
 @app.get("/")
 def home():
     return {
@@ -39,4 +56,15 @@ def home():
 def get_jobs():
     return {
         "jobs": jobs
+    }
+
+
+@app.post("/search")
+def search_jobs(data: SearchRequest):
+
+    print("User Query:", data.query)
+
+    return {
+        "message": "Query received successfully",
+        "query": data.query
     }

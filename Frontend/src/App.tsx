@@ -1,11 +1,28 @@
 import { useState } from "react";
+import axios from "axios";
 
 function App() {
 
   const [query, setQuery] = useState("");
 
-  function handleSearch() {
-    console.log("User Query:", query);
+  async function handleSearch() {
+
+    try {
+
+      const response = await axios.post(
+        "http://127.0.0.1:8000/search",
+        {
+          query: query
+        }
+      );
+
+      console.log("Backend Response:", response.data);
+
+    } catch (error) {
+
+      console.error("Error:", error);
+
+    }
   }
 
   return (
