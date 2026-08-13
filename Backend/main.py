@@ -1,6 +1,11 @@
+from langchain_google_genai import ChatGoogleGenerativeAI
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from dotenv import load_dotenv
+
+load_dotenv()  # Load environment variables from .env file
 
 app = FastAPI()
 
@@ -44,6 +49,7 @@ jobs = [
 class SearchRequest(BaseModel):
     query: str
 
+llm = ChatGoogleGenerativeAI(model="gemini-3.6-flash", temperature=0.3)
 
 @app.get("/")
 def home():
@@ -64,7 +70,13 @@ def search_jobs(data: SearchRequest):
 
     print("User Query:", data.query)
 
+    # Use the LLM to process the query
+    response = llm.invoke(data.query)
+
+    print("LLM Response:", response.content[0]['text'])
+
     return {
         "message": "Query received successfully",
-        "query": data.query
+        "query": data.query,
+        "response": response.content[0]['text']
     }
